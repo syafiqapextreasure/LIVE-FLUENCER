@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { Language } from '../types';
 import { TRANSLATIONS } from '../i18n/translations';
+import heroStudioImg from '../assets/images/hero_host_studio_exact_1791106783503.jpg';
 
 export const SetupSteps: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = TRANSLATIONS[lang].setupSteps;
@@ -66,7 +67,7 @@ export const SetupSteps: React.FC<{ lang: Language }> = ({ lang }) => {
               <div className="relative w-13 h-13 rounded-2xl p-0.5 bg-gradient-to-tr from-cyan-400 via-blue-500 to-indigo-500 shadow-[0_0_20px_rgba(18,200,245,0.4)] shrink-0 group-hover:scale-105 transition-transform">
                 <div className="w-full h-full rounded-[14px] overflow-hidden bg-slate-950 relative">
                   <img
-                    src="/src/assets/images/hero_host_studio_exact_1791106783503.jpg"
+                    src={heroStudioImg || '/images/hero_host_studio_exact_1791106783503.jpg'}
                     alt="Malaysian AI Host"
                     className="w-full h-full object-cover object-[52%_15%]"
                     referrerPolicy="no-referrer"

@@ -8,6 +8,10 @@ import {
   Tag
 } from 'lucide-react';
 import { Language } from '../types';
+import blogTiktokImg from '../assets/images/blog_tiktok_gmv_growth_1791135724196.jpg';
+import blogYellowBagImg from '../assets/images/blog_yellow_bag_tips_1791135740684.jpg';
+import blogShopeeImg from '../assets/images/blog_shopee_vs_tiktok_1791135755170.jpg';
+import blogSkincareImg from '../assets/images/blog_skincare_case_study_1791135768955.jpg';
 
 export interface BlogPost {
   id: string;
@@ -40,7 +44,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: '3 Okt 2026',
     author: 'Syafiq Affandi',
     authorRole: 'Pakar Pertumbuhan E-Dagang',
-    coverImage: '/src/assets/images/blog_tiktok_gmv_growth_1791135724196.jpg',
+    coverImage: blogTiktokImg || '/images/blog_tiktok_gmv_growth_1791135724196.jpg',
     featured: true,
     contentBm: [
       'Siaran langsung (Live Selling) kini menjadi saluran jualan nombor satu di platform seperti TikTok Shop dan Shopee di Malaysia. Namun, cabaran terbesar setiap pemilik bisnes ialah keletihan host manusia dan kos penggajian host profesional yang mencecah ribuan ringgit sebulan.',
@@ -67,7 +71,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: '1 Okt 2026',
     author: 'Nurul Huda',
     authorRole: 'Pengurus Komuniti Live',
-    coverImage: '/src/assets/images/blog_yellow_bag_tips_1791135740684.jpg',
+    coverImage: blogYellowBagImg || '/images/blog_yellow_bag_tips_1791135740684.jpg',
     contentBm: [
       'Ramai penonton masuk ke bilik live anda tetapi keluar tanpa membeli. Mengapa ini berlaku? Punca utamanya ialah ketiadaan arahan tindakan (Call To Action) yang jelas dan berulang-ulang.',
       'AI Live Host kami dilatih secara khusus untuk membuat gerak isyarat tunjuk ke Beg Kuning di sudut kiri bawah telefon setiap kali harga promo atau baucar terhad disebut.',
@@ -93,7 +97,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: '28 Sep 2026',
     author: 'Irfan Hakim',
     authorRole: 'Penganalisis Data E-Dagang',
-    coverImage: '/src/assets/images/blog_shopee_vs_tiktok_1791135755170.jpg',
+    coverImage: blogShopeeImg || '/images/blog_shopee_vs_tiktok_1791135755170.jpg',
     contentBm: [
       'Shopee Live cemerlang untuk pembeli yang sudah mempunyai niat membeli yang tinggi (high intent buyers). Mereka mencari baucar diskaun dan penghantaran percuma (Free Shipping RM15).',
       'TikTok Shop Live pula adalah platform penemuan (discovery-driven). Pengguna sering membeli secara impulsif apabila terhibur dengan celoteh dan keunikan gaya persembahan host.',
@@ -119,7 +123,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: '24 Sep 2026',
     author: 'Syafiq Affandi',
     authorRole: 'Pakar Pertumbuhan E-Dagang',
-    coverImage: '/src/assets/images/blog_skincare_case_study_1791135768955.jpg',
+    coverImage: blogSkincareImg || '/images/blog_skincare_case_study_1791135768955.jpg',
     contentBm: [
       'Sebelum menggunakan LiveFluencer.Ai, AS Beauty hanya mampu bersiaran 2 jam sehari kerana kekangan waktu kakitangan. Waktu puncak malam antara jam 11 malam hingga 3 pagi terbiar kosong.',
       'Selepas mengintegrasikan AI Host Nurul, mereka menjadualkan live automatik setiap malam bermula jam 10 malam sehingga jam 4 pagi.',

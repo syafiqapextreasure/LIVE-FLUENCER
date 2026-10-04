@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { Language } from '../types';
 import { RobotMascotIcon } from './BrandLogo';
+import heroStudioImg from '../assets/images/hero_host_studio_exact_1791106783503.jpg';
 
 interface HeroProps {
   lang: Language;
@@ -71,7 +72,7 @@ export const Hero: React.FC<HeroProps> = ({
         {/* Right side background image */}
         <div className="absolute top-0 right-0 bottom-0 w-full lg:w-[62%] h-full">
           <img
-            src="/src/assets/images/hero_host_studio_exact_1791106783503.jpg"
+            src={heroStudioImg || '/images/hero_host_studio_exact_1791106783503.jpg'}
             alt="Malaysian AI Live Host in studio"
             className="w-full h-full object-cover object-[center_20%] lg:object-center opacity-85 lg:opacity-95"
             referrerPolicy="no-referrer"
