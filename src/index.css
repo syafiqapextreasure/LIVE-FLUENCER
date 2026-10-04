@@ -74,3 +74,19 @@ html {
   will-change: transform, opacity;
 }
 
+/* TikTok-style live stream comment slide up */
+@keyframes commentSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.comment-bubble-in {
+  animation: commentSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+

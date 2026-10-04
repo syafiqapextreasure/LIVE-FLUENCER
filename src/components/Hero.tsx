@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { 
   CheckCircle2, 
   ArrowRight, 
@@ -41,26 +41,99 @@ const CONTINUOUS_HEARTS = [
   { id: 14, right: '12%', delay: '5.2s', duration: '3.0s', size: 22, color: '#EC4899' },
 ];
 
+const BM_COMMENTS = [
+  { id: 1, text: 'Suka sangat! ❤️❤️', icon: '❤️' },
+  { id: 2, text: 'Berapa harga sis?', icon: '💬' },
+  { id: 3, text: 'Ada COD tak?', icon: '📦' },
+  { id: 4, text: 'Wahh best!', icon: '✨' },
+  { id: 5, text: 'Order 2 ya!', icon: '🛍️' },
+  { id: 6, text: 'Stok masih ada?', icon: '🔥' },
+  { id: 7, text: 'Warna pink ada lagi?', icon: '🌸' },
+  { id: 8, text: 'Dah checkout! Tq host ❤️', icon: '⚡' },
+  { id: 9, text: 'Voucher Beg Kuning dah claim!', icon: '🎟️' },
+  { id: 10, text: 'Laju betul host balas haha', icon: '🚀' },
+  { id: 11, text: 'Kualiti padu ni, berbaloi!', icon: '👍' },
+  { id: 12, text: 'Boleh pos esok ke?', icon: '🚚' },
+];
+
+const EN_COMMENTS = [
+  { id: 1, text: 'Love it so much! ❤️❤️', icon: '❤️' },
+  { id: 2, text: 'How much is it?', icon: '💬' },
+  { id: 3, text: 'Do you offer COD?', icon: '📦' },
+  { id: 4, text: 'Looks amazing!', icon: '✨' },
+  { id: 5, text: 'Ordered 2 sets!', icon: '🛍️' },
+  { id: 6, text: 'Any stock left?', icon: '🔥' },
+  { id: 7, text: 'Is pink available?', icon: '🌸' },
+  { id: 8, text: 'Just checked out! Thanks host ❤️', icon: '⚡' },
+  { id: 9, text: 'Claimed yellow bag voucher!', icon: '🎟️' },
+  { id: 10, text: 'AI responds so fast haha', icon: '🚀' },
+  { id: 11, text: 'Top tier quality, worth it!', icon: '👍' },
+  { id: 12, text: 'Can you ship tomorrow?', icon: '🚚' },
+];
+
+/**
+ * Real-time TikTok/Shopee style animated comment stream:
+ * - New comments enter smoothly from the bottom
+ * - Existing comments scroll upwards
+ * - Top comment dissolves and disappears under the gradient mask
+ */
+const LiveCommentsStream: React.FC<{ lang: Language }> = ({ lang }) => {
+  const commentCatalog = useMemo(() => (lang === 'bm' ? BM_COMMENTS : EN_COMMENTS), [lang]);
+
+  // Keep a queue of visible comments (6 visible slots)
+  const [items, setItems] = useState(() =>
+    commentCatalog.slice(0, 6).map((c, i) => ({ ...c, key: `${c.id}-${i}` }))
+  );
+  const nextIdxRef = useRef(6);
+
+  useEffect(() => {
+    setItems(commentCatalog.slice(0, 6).map((c, i) => ({ ...c, key: `${c.id}-${i}` })));
+    nextIdxRef.current = 6;
+
+    const interval = setInterval(() => {
+      setItems((prev) => {
+        const nextItem = commentCatalog[nextIdxRef.current % commentCatalog.length];
+        nextIdxRef.current += 1;
+        // Shift window: drop top item, append new item at bottom
+        return [...prev.slice(1), { ...nextItem, key: `${nextItem.id}-${Date.now()}` }];
+      });
+    }, 2200);
+
+    return () => clearInterval(interval);
+  }, [commentCatalog]);
+
+  return (
+    <div className="relative h-[290px] sm:h-[310px] w-full max-w-[230px] overflow-hidden flex flex-col justify-end pr-2 sm:pr-4 my-auto pointer-events-auto [mask-image:linear-gradient(to_bottom,transparent_0%,black_18%,black_100%)] select-none">
+      <div className="flex flex-col items-end gap-2 transition-transform duration-500 ease-out">
+        {items.map((c, idx) => {
+          const isTop = idx === 0;
+          return (
+            <div
+              key={c.key}
+              className={`p-2 sm:p-2.5 rounded-2xl bg-black/80 backdrop-blur-md border border-white/15 text-xs text-white shadow-lg max-w-[215px] transition-all duration-500 ease-out ${
+                isTop
+                  ? 'opacity-20 -translate-y-2 scale-95'
+                  : 'opacity-100 translate-y-0 scale-100 comment-bubble-in'
+              }`}
+            >
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs shrink-0">{c.icon}</span>
+                <span className="font-semibold text-slate-100 text-[11px] sm:text-[12px] whitespace-nowrap">
+                  {c.text}
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
 export const Hero: React.FC<HeroProps> = ({
   lang,
   onExplorePricing,
 }) => {
-  const comments = lang === 'bm' ? [
-    { text: 'Suka sangat! ❤️❤️', icon: '❤️' },
-    { text: 'Berapa harga?', icon: '💬' },
-    { text: 'Ada COD?', icon: '📦' },
-    { text: 'Wahh best!', icon: '✨' },
-    { text: 'Order 2 ya!', icon: '🛍️' },
-    { text: 'Stok masih ada?', icon: '🔥' },
-  ] : [
-    { text: 'Love it so much! ❤️❤️', icon: '❤️' },
-    { text: 'How much is it?', icon: '💬' },
-    { text: 'Do you offer COD?', icon: '📦' },
-    { text: 'Looks amazing!', icon: '✨' },
-    { text: 'Ordered 2 sets!', icon: '🛍️' },
-    { text: 'Any stock left?', icon: '🔥' },
-  ];
-
   return (
     <section className="relative pt-8 pb-16 lg:pt-14 lg:pb-20 bg-[#040E1A] overflow-hidden text-left min-h-[640px] flex flex-col justify-between">
       
@@ -206,21 +279,8 @@ export const Hero: React.FC<HeroProps> = ({
 
             </div>
 
-            {/* Floating Live Comments stacked on the right */}
-            <div className="flex flex-col items-end gap-2 pr-2 sm:pr-4 my-auto">
-              {comments.map((c, idx) => (
-                <div
-                  key={idx}
-                  className="p-2 sm:p-2.5 rounded-2xl bg-black/75 backdrop-blur-md border border-white/15 text-xs text-white shadow-lg animate-in fade-in slide-in-from-right-4 duration-300 pointer-events-auto max-w-[210px]"
-                  style={{ animationDelay: `${idx * 140}ms` }}
-                >
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-xs">{c.icon}</span>
-                    <span className="font-semibold text-slate-100 text-[11px] sm:text-[12px]">{c.text}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {/* Floating Live Comments animated stream (TikTok / Shopee Live style) */}
+            <LiveCommentsStream lang={lang} />
 
             {/* Bottom Row: 3x GMV Glass Banner Card */}
             <div className="w-full flex justify-end pb-2">
