@@ -1,0 +1,6 @@
+{
+  "name": "LiveFluencer.AI - Malaysian AI Live Host Platform",
+  "description": "Cipta host AI bercakap BM atau English daripada satu gambar. Jawab komen live dalam beberapa saat untuk TikTok dan e-commerce Malaysia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

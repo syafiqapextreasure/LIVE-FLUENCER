@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,800;1,900&family=Outfit:wght@500;600;700;800;900&display=swap');
+
+:root {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color-scheme: dark light;
+}
+
+/* Glassmorphism helpers */
+.glass-panel-dark {
+  background: rgba(4, 20, 33, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(18, 200, 245, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(18, 200, 245, 0.2);
+  box-shadow: 0 10px 30px -5px rgba(4, 20, 33, 0.08);
+}
+
+.glass-card-interactive {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-card-interactive:hover {
+  transform: translateY(-2px);
+  border-color: rgba(18, 200, 245, 0.4);
+  box-shadow: 0 12px 30px -10px rgba(18, 200, 245, 0.15);
+}
+
+/* Focus styles for accessibility */
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid #12C8F5;
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Non-stop floating hearts animation */
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0) scale(0.6) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.95;
+    transform: translateY(-30px) scale(1) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-130px) scale(1.1) rotate(12deg);
+    opacity: 0.85;
+  }
+  80% {
+    transform: translateY(-220px) scale(0.95) rotate(-6deg);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-300px) scale(0.7) rotate(10deg);
+    opacity: 0;
+  }
+}
+
+.floating-heart {
+  animation: floatHeart var(--duration, 3.2s) ease-in infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: transform, opacity;
+}
+
